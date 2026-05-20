@@ -41,8 +41,8 @@ public static class PlaceCameraModel
         float s = b.size.magnitude > 0.001f ? 0.18f / b.size.y : 0.003f;
         cam.transform.localScale = Vector3.one * s;
 
-        // ── Position on sidewalk pedestal ─────────────────────────────────────
-        cam.transform.position = new Vector3(1.8f, 0.18f, -0.5f);
+        // ── Position on pedestal (CameraStand cylinder, top at y=1.0) ────────
+        cam.transform.position = new Vector3(1.8f, 1.09f, -0.5f);
         cam.transform.rotation = Quaternion.Euler(0f, -20f, 0f);
 
         // ── Apply material to every renderer ──────────────────────────────────
