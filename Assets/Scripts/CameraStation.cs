@@ -28,6 +28,7 @@ public class CameraStation : MonoBehaviour
     // ── sous-titre ────────────────────────────────────────────────────────
     private TextMeshProUGUI _label;
     private float           _clearAt = -1f;
+    private GameObject      _subtitleRoot;
 
     // ──────────────────────────────────────────────────────────────────────
 
@@ -92,8 +93,8 @@ public class CameraStation : MonoBehaviour
             return;
         }
 
-        bool near = _playerTf != null
-            && Vector3.Distance(_playerTf.position, cameraWorldObject.transform.position) <= proximityRadius;
+        bool near = _headTf != null
+            && Vector3.Distance(_headTf.position, cameraWorldObject.transform.position) <= proximityRadius;
 
         if (_hovered)
             SetLabel("Appuyer sur la gâchette pour prendre l'appareil");
@@ -111,8 +112,8 @@ public class CameraStation : MonoBehaviour
     // ── bouton Y / E ──────────────────────────────────────────────────────
     private void OnButtonGrab(InputAction.CallbackContext _)
     {
-        if (_playerTf == null) return;
-        if (Vector3.Distance(_playerTf.position, cameraWorldObject.transform.position) > proximityRadius) return;
+        if (_headTf == null) return;
+        if (Vector3.Distance(_headTf.position, cameraWorldObject.transform.position) > proximityRadius) return;
         Pickup();
     }
 
@@ -129,6 +130,11 @@ public class CameraStation : MonoBehaviour
     }
 
     public bool IsHolding => _holding;
+
+    public void SetSubtitleVisible(bool visible)
+    {
+        if (_subtitleRoot != null) _subtitleRoot.SetActive(visible);
+    }
 
     // ── XRSimpleInteractable ──────────────────────────────────────────────
     private void SetupInteractable()
@@ -157,6 +163,7 @@ public class CameraStation : MonoBehaviour
 
         // Canvas World Space attaché à la tête VR
         var root = new GameObject("_SubtitleCanvas");
+        _subtitleRoot = root;
         root.transform.SetParent(_headTf, false);
 
         // Position en bas de la vue, 1.2 m devant
