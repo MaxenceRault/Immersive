@@ -1,4 +1,4 @@
-# IIMersive Project - Maxence RAULT, Yohan Seneret, Rey Kosso
+# IIMersive Project - Maxence RAULT, Yohan SENERET, Rey KOSSO
 
 ## Touches (manette)
 
